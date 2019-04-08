@@ -1,0 +1,53 @@
+Arguments: 
+  /usr/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /home/ben/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.15.2
+
+Node version: 
+  8.10.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/ben/Documents/stuff/contracts/ex/package.json: Unexpected string in JSON at position 393
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:304:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:315:13
+      at <anonymous>
+
+npm manifest: 
+  {
+    "name": "ex",
+    "version": "0.0.1",
+    "main": "run.js",
+    "author": "ben",
+    "license": "MIT",
+    "dependencies": {
+      "demux": "5.0.1-36c90a3.0",
+      "demux-eos": "4.0.2-6f8b25d.0",
+      "demux-postgres": "4.0.2-23301b2.0",
+      "massive": "5.7.2",
+      "pg-monitor": "^1.1.0",
+      "yarn": "^1.15.2"
+    },
+    "devDependencies": {
+      "@types/massive": "5.4.3",
+      "typescript": "3.3.3"
+    }
+    "resolutions": {
+       "pg-promise": "8.4.6"
+     }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

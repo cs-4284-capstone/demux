@@ -1,0 +1,4 @@
+{
+  "host": "mongodb+srv://fakeuser:fakepass@cluster0-b9yna.mongodb.net",
+  "dbName": "EOS"
+}

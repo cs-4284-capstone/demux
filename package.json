@@ -1,0 +1,19 @@
+{
+  "name": "ex",
+  "version": "0.0.1",
+  "main": "run.js",
+  "author": "ben",
+  "license": "MIT",
+  "dependencies": {
+    "demux": "4.0.0",
+    "demux-eos": "4.0.1",
+    "demux-postgres": "4.0.1"
+  },
+  "devDependencies": {
+    "@types/massive": "5.4.3",
+    "typescript": "3.3.3"
+  },
+  "resolutions": {
+     "pg-promise": "8.4.6"
+   }
+}
