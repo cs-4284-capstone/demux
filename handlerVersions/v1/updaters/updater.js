@@ -47,7 +47,8 @@ var apply = function (state, payload, blockInfo, context) { return __awaiter(_th
     return __generator(this, function (_a) {
         console.log("begin");
         console.log(payload.data.from); //the name of the user who purchased the song
-        console.log(payload.data.memo); //the name of the song/songs purchased
+        console.log(payload.data.memo.split(";")[0]); //the song id
+        console.log(payload.data.memo.split(";")[1]); //purchase id
         return [2 /*return*/];
     });
 }); };

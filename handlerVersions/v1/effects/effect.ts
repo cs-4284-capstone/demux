@@ -7,9 +7,10 @@ import { Effect, Block, StatelessActionCallback } from 'demux'
 const http = require('http');
 
 const run: StatelessActionCallback = async (payload: any, block: Block, context: any) => {
-  let req = await http.get("http://localhost:3001/api/users"); //modify this to your api call
+  //let req = await http.get("http://localhost:3001/api/users"); //modify this to your api call
   //payload.data.from = the user that sent the transaction
-  //payload.data.memo = the name of the song(note: only 1 song at a time for now on server)
+  //payload.data.memo.split(";")[0] = the id of the song(note: only 1 song id at a time for now)
+  //payload.data.memo.split(";")[1] = the purchase id
 }
 
 const effect: Effect = {

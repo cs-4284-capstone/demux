@@ -1,5 +1,5 @@
 {
-  "startAtBlock": 417500,
+  "startAtBlock": 418100,
   "onlyIrreversible": false,
   "pollInterval": 250,
   "endpointPort": 8282

@@ -11,7 +11,8 @@ import { Updater, BlockInfo, ActionCallback } from 'demux'
 const apply: ActionCallback = async (state: any, payload: any, blockInfo: BlockInfo, context: any) => {
   console.log("begin");
   console.log(payload.data.from); //the name of the user who purchased the song
-  console.log(payload.data.memo); //the name of the song/songs purchased
+  console.log(payload.data.memo.split(";")[0]); //the song id
+  console.log(payload.data.memo.split(";")[1]); //purchase id
 }
 
 const updater: Updater = {

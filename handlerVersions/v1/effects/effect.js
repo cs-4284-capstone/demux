@@ -42,14 +42,8 @@ var _this = this;
 exports.__esModule = true;
 var http = require('http');
 var run = function (payload, block, context) { return __awaiter(_this, void 0, void 0, function () {
-    var req;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, http.get("http://localhost:3001/api/users")];
-            case 1:
-                req = _a.sent();
-                return [2 /*return*/];
-        }
+        return [2 /*return*/];
     });
 }); };
 var effect = {
