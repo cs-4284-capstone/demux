@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    expose:
+      - "5432"
+  
+  demux:
+    build:
+      context: .
+      dockerfile: Dockerfile.demux
+    ports:
+      - "8282:8282"
+    depends_on:
+      - postgres

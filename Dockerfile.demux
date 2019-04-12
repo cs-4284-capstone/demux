@@ -1,0 +1,19 @@
+FROM node:11
+
+RUN npm install -g npm
+RUN npm install -g typescript
+RUN npm install -g yarn
+
+RUN mkdir demux
+WORKDIR demux
+
+COPY package.json /demux/package.json
+COPY yarn.lock /demux/yarn.lock
+RUN yarn install
+
+COPY . /demux
+RUN npm build
+COPY ExpressActionWatcher.d.ts /demux/node_modules/demux/dist
+RUN tsc run.ts --resolveJsonModule
+
+CMD node run.js
