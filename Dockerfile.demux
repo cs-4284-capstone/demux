@@ -16,4 +16,4 @@ RUN npm build
 COPY ExpressActionWatcher.d.ts /demux/node_modules/demux/dist
 RUN tsc run.ts --resolveJsonModule
 
-CMD node run.js
+CMD ["sh", "-c", "sleep 5 && node run.js"]
