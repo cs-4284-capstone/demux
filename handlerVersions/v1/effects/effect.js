@@ -42,8 +42,18 @@ var _this = this;
 exports.__esModule = true;
 var http = require('http');
 var run = function (payload, block, context) { return __awaiter(_this, void 0, void 0, function () {
+    var record, songid, purchaseid, req;
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                record = payload.data.split(";");
+                songid = record[0];
+                purchaseid = record[1];
+                return [4 /*yield*/, http.get("http://admin:8000/api/purchases/" + purchaseid + "/send")];
+            case 1:
+                req = _a.sent();
+                return [2 /*return*/];
+        }
     });
 }); };
 var effect = {

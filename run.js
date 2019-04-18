@@ -41,19 +41,46 @@ var demux_eos_1 = require("demux-eos");
 var demux_postgres_1 = require("demux-postgres");
 var massive = require("massive");
 var migrationSequences_1 = require("./migrationSequences");
-var dbConfig = require("./config/dbConfig.json");
+//import * as dbConfig from './config/dbConfig.json'
 var demuxConfig = require("./config/demuxConfig.json");
-var mongoConfig = require("./config/mongoConfig.json");
+//import * as mongoConfig from './config/mongoConfig.json'
 var handlerVersions_1 = require("./handlerVersions");
+function env_req(varname) {
+    var item = process.env[varname];
+    if (typeof item === "string") {
+        return item;
+    }
+    else {
+        throw "Cannot read required environment variable: " + varname;
+    }
+}
+function env_def(varname, def) {
+    var item = process.env[varname];
+    if (typeof item === "string") {
+        return item;
+    }
+    else {
+        return def;
+    }
+}
 // An async init is created and then called to allow for `await`ing the setup code
 var init = function () { return __awaiter(_this, void 0, void 0, function () {
-    var actionReader, massiveInstance, actionHandler, actionWatcher;
+    var mongo_endpoint, dbConfig, actionReader, massiveInstance, actionHandler, actionWatcher;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                mongo_endpoint = "mongodb+srv://"
+                    + env_req('MONGO_UNAME') + ":" + env_req('MONGO_PASS') + "@" + env_req('MONGO_HOST') + ":" + env_req('MONGO_PORT');
+                dbConfig = {
+                    user: env_req('POSTGRES_UNAME'),
+                    password: env_req('POSTGRES_PASS'),
+                    host: env_req('POSTGRES_HOST'),
+                    port: parseInt(env_req('POSTGRES_PORT')),
+                    database: env_req('POSTGRES_DBNAME')
+                };
                 actionReader = new demux_eos_1.MongoActionReader({
-                    mongoEndpoint: mongoConfig.host,
-                    dbName: mongoConfig.dbName,
+                    mongoEndpoint: mongo_endpoint,
+                    dbName: process.env.MONGO_DBNAME,
                     startAtBlock: demuxConfig.startAtBlock,
                     onlyIrreversible: demuxConfig.onlyIrreversible
                 });
@@ -63,7 +90,7 @@ var init = function () { return __awaiter(_this, void 0, void 0, function () {
                 return [4 /*yield*/, massive(dbConfig)];
             case 2:
                 massiveInstance = _a.sent();
-                actionHandler = new demux_postgres_1.MassiveActionHandler(handlerVersions_1.handlerVersions, massiveInstance, dbConfig.schema, migrationSequences_1.migrationSequences);
+                actionHandler = new demux_postgres_1.MassiveActionHandler(handlerVersions_1.handlerVersions, massiveInstance, env_def('POSTGRES_SCHEMA', 'new33'), migrationSequences_1.migrationSequences);
                 actionWatcher = new demux_1.ExpressActionWatcher(actionReader, actionHandler, demuxConfig.pollInterval, demuxConfig.endpointPort);
                 return [4 /*yield*/, actionWatcher.listen()];
             case 3:
@@ -73,4 +100,4 @@ var init = function () { return __awaiter(_this, void 0, void 0, function () {
         }
     });
 }); };
-init();
+init()["catch"](function (e) { return console.error("Uncaught error: " + e); });

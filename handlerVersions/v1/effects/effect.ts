@@ -11,6 +11,19 @@ const run: StatelessActionCallback = async (payload: any, block: Block, context:
   //payload.data.from = the user that sent the transaction
   //payload.data.memo.split(";")[0] = the id of the song(note: only 1 song id at a time for now)
   //payload.data.memo.split(";")[1] = the purchase id
+  console.log("Recieved transaction!:")
+  console.log("###PAYLOAD###")
+  console.log(payload)
+  console.log('###BLOCK###')
+  console.log(block)
+  console.log('###CONTEXT###')
+  console.log(context)
+  console.log("#######")
+
+  const record = payload.data.memo.split(";");
+  const songid = record[0];
+  const purchaseid = record[1];
+  const req = await http.get("http://admin:8000/api/purchases/" + purchaseid + "/send");
 }
 
 const effect: Effect = {

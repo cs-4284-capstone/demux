@@ -13,7 +13,11 @@ RUN yarn install
 
 COPY . /demux
 RUN npm build
+
+# Patch their stupid broken code
 COPY ExpressActionWatcher.d.ts /demux/node_modules/demux/dist
+COPY MongoActionReader.js /demux/node_modules/demux-eos/dist/mongo
+
 RUN tsc run.ts --resolveJsonModule
 
 CMD ["sh", "-c", "sleep 5 && node run.js"]
